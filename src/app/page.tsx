@@ -4,36 +4,53 @@ import React, {useState} from "react"
 import Task from "@/component/task/task"
 import { data } from "autoprefixer"
 
-export default function Home() {
+// const initialState = [
+//   {id: 2, title:'html', active: true,}, 
+//   {id: 3, title:'csss', active: true,},
+//   {id: 5, title:'car', active: false,},
+//   {id: 4, title:'soo', active: false,},
+//   {id: 1, title:'duck', active: true,},
+// ]
 
-    const [value, newState] = useState<string>("")
-    const [tasks, setTasks] = useState<any>([
+const usst = [
       {id: 2, title:'html', active: true,}, 
       {id: 3, title:'csss', active: true,},
       {id: 5, title:'car', active: false,},
       {id: 4, title:'soo', active: false,},
       {id: 1, title:'duck', active: true,},
-    ])
+    ]
+export default function Home() {
+
+    const [value, newState] = useState<string>("")
+    const [tasks, setTasks] = useState<any>(usst)
+
     const handleClick  = (id) => {      
-      
+
       const a =  tasks.find(el => el.id ===  id)
-      a.active = !a.active 
-      setTasks(el => [...el, a]);                 
+      a.active = !a.active
+      setTasks()  
+      // setTasks(el => [...el, a]);                 
      }
-    const removeAll = () => {
-      
-    }
-    const removeComleted = () => {
-      
+    
+    const statusHandler = (value) => {
+      if (value == 'all'){
+        setTasks(usst)
+      }
+      if(value == 'active'){
+        setTasks(arr => arr.filter(el => el.active === false ) )  
+      }if(value == 'comleted') {
+        // setTasks(arr => arr.filter(el => el.active === true ) )
+        setTasks(usst.filter(el => el.active === true) )    
+      }
     }
 
     function removeTask (id) {
       setTasks(arr => arr.filter(el => el.id !== id) )
     }
 
-    function removeActive () {
-      setTasks(arr => arr.filter(el => el.active ) )
-    }
+    // function removeActive () {
+    //   setTasks(arr => arr.filter(el => el.active ) )
+    // }
     
     
 
@@ -60,9 +77,9 @@ export default function Home() {
                       </button>
                   </div>
                   <div className="nav_body">
-                        <a href="#" className="nav-link" onClick={removeAll}>All</a>
-                        <a href="#" className="nav-link" onClick={removeActive}>Active</a>
-                        <a href="#" className="nav-link" onClick={removeComleted}>Completed</a>
+                        <button value='all' className="nav-but" onClick={() => statusHandler('all')}>All</button>
+                        <button value='active' className="nav-but" onClick={() => statusHandler('active')}>Active</button>
+                        <button value='completed' className="nav-but" onClick={() => statusHandler('comleted')}>Completed</button>
                   </div>
                     <div className="todo-list">
                         {tasks.map(el => (

@@ -127,6 +127,12 @@ div.button, div.checker, div.radio, div.selector, div.uploader {
 .nav_body {
     display: flex;
     gap: 10px;
+    margin-top: 10px;
+    
+}
+
+.nav-but {
+    background-color: white;    
 }
 
 .H1 {

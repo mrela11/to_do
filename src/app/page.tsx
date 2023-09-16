@@ -24,11 +24,13 @@ export default function Home() {
     const [value, newState] = useState<string>("")
     const [tasks, setTasks] = useState<any>(usst)
 
-    const handleClick  = (id) => {      
+    const handleClick  = (id) => {
 
       const a =  tasks.find(el => el.id ===  id)
-      a.active = !a.active
-      setTasks()  
+      
+      setTasks(el => [...el], a.active = !a.active)
+      
+  
       // setTasks(el => [...el, a]);                 
      }
     
